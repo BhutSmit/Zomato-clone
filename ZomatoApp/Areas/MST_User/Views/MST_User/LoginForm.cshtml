@@ -1,0 +1,264 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_Login.cshtml";
+}
+@using ZomatoApp.Areas.MST_User.Models;
+@model MST_UserModel
+<main>
+    <div class="container">
+
+        <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+                        <div class="d-flex justify-content-center py-4">
+                            <a href="index.html" class="logo d-flex align-items-center w-auto">
+                                <img src="assets/img/logo.png" alt="">
+                                <span class="d-none d-lg-block">Zomato</span>
+                            </a>
+                        </div><!-- End Logo -->
+
+                        <div class="card mb-3">
+
+                            <div class="card-body">
+
+                                <div class="pt-4 pb-2">
+                                    <h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
+                                    <p class="text-center small">Enter your username & password to login</p>
+                                </div>
+
+                                <form class="row g-3 needs-validation" asp-area="MST_User" asp-controller="MST_User" asp-action="LoginUser">
+
+                                    <div class="col-12">
+                                        <label for="yourUsername" class="form-label">Username</label>
+                                        <div class="input-group has-validation">
+                                            <span class="input-group-text" id="inputGroupPrepend"></span>
+                                            <input type="text" asp-for="UserName" class="form-control" id="yourUsername" required>
+                                            <span asp-validation-for="UserName" class="text-danger"></span>
+                                            <div class="invalid-feedback">Please enter your username.</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="yourPassword" class="form-label">Password</label>
+                                        <input type="password" asp-for="Password" class="form-control" id="yourPassword" required>
+                                        <span asp-validation-for="Password" class="text-danger"></span>
+                                        <div class="invalid-feedback">Please enter your password!</div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="remember" value="true" id="rememberMe">
+                                            <label class="form-check-label" for="rememberMe">Remember me</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <button class="btn btn-primary w-100" type="submit">Login</button>
+                                    </div>
+                                    <div class="col-12">
+                                        <p class="small mb-0">Don't have account? <a asp-area="MST_User" asp-controller="MST_User" asp-action="SignUpForm">Create an account</a></p>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+</main><!-- End #main -->
+
+<style>
+
+    .form-container{
+
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .left-side{
+
+        width: 64%;
+        height: 100%;
+    }
+
+    .img{
+
+        width: 60%;
+        height: 60%;
+        mix-blend-mode: multiply;
+    }
+
+    .right-side{
+
+        width: auto;
+        position: relative;
+    }
+
+    .main-form{
+
+        width: 100%;
+        height: 100vh;
+        /*background-color: #ecf0f1;*/
+        border: 1px solid rgba(0 , 0 , 0 , 0.3);
+        border-radius: 10px;
+        box-shadow: -2px 0px 20px 0px rgba(0 , 0 , 0 , 0.2);
+        overflow: hidden;
+    }
+
+    .heading{
+
+        margin: 100px 0px 70px 0px;
+    }
+
+    .input{
+
+        width: 100%;
+        height: 50px;
+        border: 1px solid #dcdde1;
+        border-radius: 10px;
+        outline: none;
+        padding: 0px 10px;
+        transition: all 0.3s linear;
+    }
+
+    .input:focus{
+
+        border: 2px solid transparant;
+        border-bottom-color: #fbc531;
+    }
+
+    ::placeholder{
+
+        font-size: 13px;
+    }
+
+    .button{
+
+        width: 100%;
+        height: 50px;
+        /*background-color: #5352ed;*/
+        background-color: rgba(100 , 149 , 250 , 0.9);
+        border: none;
+        outline: none;
+        border-radius: 10px;
+        color: #efefef;
+        font-weight: 800;
+    }
+
+    .input-lable{
+
+        font-size: 14px;
+        font-weight: 600;
+
+    }
+
+    .food-image-container{
+
+        width: 100%;
+        height: 250px;
+        position: absolute;
+        margin: 15px 0px;
+        /*border: 2px solid black;*/
+        overflow: hidden;
+    }
+
+    .food-image-container img{
+
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        object-fit: contain;
+        mix-blend-mode: darken;
+    }
+
+    .food-image2{
+
+        width: 150px;
+        height: 150px;
+        position: absolute;
+        top: 0%;
+        right: 0%;
+    }
+
+</style>
+
+<div class="form-container">
+
+    <div class="left-side d-flex">
+
+        <div id="carouselExampleSlidesOnly" class="carousel slide w-100 d-flex justify-content-center align-items-center" data-bs-ride="carousel">
+            <div class="carousel-inner d-flex justify-content-around align-items-center img">
+                <div class="carousel-item active" data-bs-interval="2000">
+                    <img src="~/img/Welcome.gif" class="img-fluid img" alt="...">
+                </div>
+                <div class="carousel-item" data-bs-interval="2000">
+                    <img src="~/img/Secure login.gif" class="img-fluid img" alt="...">
+                </div>
+                <div class="carousel-item" data-bs-interval="2000">
+                    <img src="~/img/Tablet login.gif" class="img-fluid img" alt="...">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="right-side col">
+
+        <div class="main-form">
+            
+            <h3 class="text-center fs-3 heading">Login To Your Account</h3>
+            <form asp-area="MST_User" asp-controller="MST_User" asp-action="LoginUser">
+
+                <div class="input-fields mt-3 mx-5">
+
+                    <div class="input-container mb-3">
+
+                        <div class="ms-1 mb-2 input-lable"><i class="fa-regular fa-user me-3"></i>UserName</div>
+                        <input type="text" class="input" asp-for="UserName" placeholder="Enter The UserName" />
+
+                    </div>
+
+                    <div class="input-container">
+
+                        <div class="ms-1 mb-2 input-lable"><i class="fa-solid fa-lock me-3"></i>Password</div>
+                        <input type="password" class="input" asp-for="Password" placeholder="Enter The Password" />
+
+                    </div>
+
+                    <div class="input-container mt-4">
+
+                        <input type="submit" value="Login" class="button" />
+
+                    </div>
+
+                </div>
+
+            </form>
+
+            <div class="food-image-container">
+
+                <img src="~/img/foodbg.png" />
+
+            </div>
+
+            <div class="food-image-container food-image2">
+
+                <img src="~/img/foodbg1.png" />
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

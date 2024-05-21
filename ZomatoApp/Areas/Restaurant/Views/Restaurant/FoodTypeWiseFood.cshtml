@@ -1,0 +1,292 @@
+﻿@using System.Data;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+
+    .line {
+        width: 50%;
+        height: 1px;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    ::placeholder {
+        font-size: 13px;
+    }
+
+    .table-container {
+        /*overflow: scroll;*/
+        overflow-x: scroll;
+    }
+
+    p{
+        margin: 0;
+        padding: 0;
+    }
+    
+    .card-container{
+
+        width: 230px;
+        height: 320px;
+        position: relative;
+        border: 2px solid #ced6e0;
+        border-radius: 20px;
+        background-color: #f1f2f6;
+        padding: 13px;
+    }
+
+    .image-container{
+
+        width: 100%;
+        height: 150px;
+        border-radius: 5px;
+        position: relative;
+        overflow: hidden;
+
+    }
+
+    .image-container img{
+
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        object-fit: contain;
+
+    }
+
+    .foodName{
+
+        width: 100px;
+        font-size: 16px;
+        font-weight: 700;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .staus-cnotainer{
+
+        margin: 2px 0px;
+        
+    }
+
+    .status{
+        color: #a4b0be;
+        font-size: 10px;
+    }
+
+    .vegiterian{
+
+        width: 15px;
+        height: 15px;
+        border: 2px solid rgba(10 , 150 , 10 , 0.8);
+        border-radius: 2px;
+        position: absolute;
+        top: 10px;
+        left: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .veg-circle{
+
+        width: 6px;
+        height: 6px;
+        background-color: rgba(10 , 150 , 10 , 0.8);
+        border-radius: 50%;
+    }
+
+    .vegiteriannon{
+
+        width: 15px;
+        height: 15px;
+        border: 2px soldi rgba(150, 10 , 10 , 0.8);
+        position: absolute;
+        top: 10px;
+        left: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .vegnon-circle{
+
+        width: 5px;
+        height: 5px;
+        background-color: rgba(150 , 10 , 10 , 0.8);
+        border-radius: 50%;
+    }
+
+    .description{
+        font-size: 13px;
+    }
+
+    .alert-container {
+        width: 100%;
+        height: 60px;
+    }
+
+    ::-webkit-scrollbar {
+        width: 5px;
+        height: 3px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: #efefef;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: rgba(240, 240, 240, 0.8);
+    }
+
+    ::-webkit-scrollbar-thumb:horizontal {
+        background: #efefef;
+        border-radius: 10px;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+
+</style>
+
+<div class="alert-container">
+    @if (TempData["Data"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            @TempData["Data"]
+        </div>
+    }
+</div>
+
+<div class="pagetitle my-1 mx-2">
+    <h1>Dashboard</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item active">Restaurant</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+
+<div class="border rounded px-5 py-2 shadow-sm mb-3">
+
+    <div>
+        <div class="w-25 my-3">
+            <p class="text-secondary">
+                <span class="ms-1 me-2">&#x2022</span> Search With JQuery
+            </p>
+            <label class="visually-hidden" for="autoSizingInputGroup">Username</label>
+            <div class="input-group">
+                <div class="input-group-text bg-transparent" style="font-size: 15px"><i class="bi bi-search"></i></div>
+                <input type="text" class="form-control" id="myInput" placeholder="Search here">
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="border rounded p-5 shadow d-flex flex-wrap">
+
+    @foreach (DataRow dr in Model.Rows)
+    {
+
+        <div class="card-container shadow me-3">
+
+            <div class="image-container">
+
+                <img src=@dr["FoodImage"] />
+
+            </div>
+            @if (Convert.ToBoolean(dr["IsVegiterian"]))
+            {
+
+                <div class="vegiterian">
+                    <div class="veg-circle"></div>
+                </div>
+
+            }
+            else
+            {
+                <div class="vegiteriannon">
+                    <div class="vegnon-circle"></div>
+                </div>
+            }
+            <div class="d-flex justify-content-between align-items-center mt-2">
+
+                <p class="foodName">@dr["FoodName"]</p>
+                <p>@dr["Price"]</p>
+
+            </div>
+            <div class="d-flex mt-1">
+                <i class="bi bi-star" style="color: rgba(200 , 30 , 50 , 0.8)"></i>
+                <p class="ms-2">@dr["Review"]</p>
+
+            </div>
+            <div class="staus-cnotainer">
+
+                @if (Convert.ToBoolean(dr["IsActive"]))
+                {
+                    <p class="status">Available</p>
+                }
+                else
+                {
+                    <p class="status">Not Available</p>
+                }
+
+            </div>
+            <div class="description-container mt-2">
+
+                <p class="description">@dr["Description"]</p>
+
+            </div>
+
+        </div>
+
+    }
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+@section Scripts {
+
+    <script>
+        $(document).ready(function () {
+            //alert("Hello");
+            $("#myInput").on("keyup", function () {
+                //alert("Function");
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+
+        function deleteCity() {
+
+            if (confirm("Are you sure want to delete?")) {
+
+                return true
+
+            }
+
+            return false
+
+        }
+
+        window.setTimeout(function () {
+            $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                $(this).remove();
+            })
+        }, 1000);
+
+    </script>
+
+}

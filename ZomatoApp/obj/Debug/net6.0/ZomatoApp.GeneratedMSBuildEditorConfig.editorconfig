@@ -1,0 +1,193 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = ZomatoApp
+build_property.RootNamespace = ZomatoApp
+build_property.ProjectDir = D:\Sem 5\Asp Dot Net\Zomato App\ZomatoApp\ZomatoApp\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = D:\Sem 5\Asp Dot Net\Zomato App\ZomatoApp\ZomatoApp
+build_property._RazorSourceGeneratorDebug = 
+
+[D:/Sem 5/Asp Dot Net/Zomato App/ZomatoApp/ZomatoApp/Areas/FoodType/Views/FoodType/AddEditFoodType.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRm9vZFR5cGVcVmlld3NcRm9vZFR5cGVcQWRkRWRpdEZvb2RUeXBlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Sem 5/Asp Dot Net/Zomato App/ZomatoApp/ZomatoApp/Areas/FoodType/Views/FoodType/RestaurantWiseFoodType.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRm9vZFR5cGVcVmlld3NcRm9vZFR5cGVcUmVzdGF1cmFudFdpc2VGb29kVHlwZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Sem 5/Asp Dot Net/Zomato App/ZomatoApp/ZomatoApp/Areas/FoodType/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRm9vZFR5cGVcVmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Sem 5/Asp Dot Net/Zomato App/ZomatoApp/ZomatoApp/Areas/Food/Views/Food/AddEditFood.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRm9vZFxWaWV3c1xGb29kXEFkZEVkaXRGb29kLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Sem 5/Asp Dot Net/Zomato App/ZomatoApp/ZomatoApp/Areas/Food/Views/Food/FoodTypeWiseFood.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRm9vZFxWaWV3c1xGb29kXEZvb2RUeXBlV2lzZUZvb2QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Sem 5/Asp Dot Net/Zomato App/ZomatoApp/ZomatoApp/Areas/Food/Views/Shared/_FilterPartialView.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRm9vZFxWaWV3c1xTaGFyZWRcX0ZpbHRlclBhcnRpYWxWaWV3LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Sem 5/Asp Dot Net/Zomato App/ZomatoApp/ZomatoApp/Areas/Food/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRm9vZFxWaWV3c1xfVmlld0ltcG9ydHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Sem 5/Asp Dot Net/Zomato App/ZomatoApp/ZomatoApp/Areas/LOC_City/Views/LOC_City/AddEditCity.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTE9DX0NpdHlcVmlld3NcTE9DX0NpdHlcQWRkRWRpdENpdHkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Sem 5/Asp Dot Net/Zomato App/ZomatoApp/ZomatoApp/Areas/LOC_City/Views/LOC_City/CityList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTE9DX0NpdHlcVmlld3NcTE9DX0NpdHlcQ2l0eUxpc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Sem 5/Asp Dot Net/Zomato App/ZomatoApp/ZomatoApp/Areas/LOC_City/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTE9DX0NpdHlcVmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Sem 5/Asp Dot Net/Zomato App/ZomatoApp/ZomatoApp/Areas/LOC_Country/Views/LOC_Country/AddEditCountry.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTE9DX0NvdW50cnlcVmlld3NcTE9DX0NvdW50cnlcQWRkRWRpdENvdW50cnkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Sem 5/Asp Dot Net/Zomato App/ZomatoApp/ZomatoApp/Areas/LOC_Country/Views/LOC_Country/CountryList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTE9DX0NvdW50cnlcVmlld3NcTE9DX0NvdW50cnlcQ291bnRyeUxpc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Sem 5/Asp Dot Net/Zomato App/ZomatoApp/ZomatoApp/Areas/LOC_Country/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTE9DX0NvdW50cnlcVmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Sem 5/Asp Dot Net/Zomato App/ZomatoApp/ZomatoApp/Areas/LOC_State/Views/LOC_State/AddEditState.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTE9DX1N0YXRlXFZpZXdzXExPQ19TdGF0ZVxBZGRFZGl0U3RhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Sem 5/Asp Dot Net/Zomato App/ZomatoApp/ZomatoApp/Areas/LOC_State/Views/LOC_State/StateList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTE9DX1N0YXRlXFZpZXdzXExPQ19TdGF0ZVxTdGF0ZUxpc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Sem 5/Asp Dot Net/Zomato App/ZomatoApp/ZomatoApp/Areas/LOC_State/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTE9DX1N0YXRlXFZpZXdzXF9WaWV3SW1wb3J0cy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Sem 5/Asp Dot Net/Zomato App/ZomatoApp/ZomatoApp/Areas/MST_User/Views/MST_User/LoginForm.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTVNUX1VzZXJcVmlld3NcTVNUX1VzZXJcTG9naW5Gb3JtLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Sem 5/Asp Dot Net/Zomato App/ZomatoApp/ZomatoApp/Areas/MST_User/Views/MST_User/SignUpForm.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTVNUX1VzZXJcVmlld3NcTVNUX1VzZXJcU2lnblVwRm9ybS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Sem 5/Asp Dot Net/Zomato App/ZomatoApp/ZomatoApp/Areas/MST_User/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTVNUX1VzZXJcVmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Sem 5/Asp Dot Net/Zomato App/ZomatoApp/ZomatoApp/Areas/Restaurant/Views/Restaurant/AddEditRestaurant.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUmVzdGF1cmFudFxWaWV3c1xSZXN0YXVyYW50XEFkZEVkaXRSZXN0YXVyYW50LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Sem 5/Asp Dot Net/Zomato App/ZomatoApp/ZomatoApp/Areas/Restaurant/Views/Restaurant/FoodTypeWiseFood.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUmVzdGF1cmFudFxWaWV3c1xSZXN0YXVyYW50XEZvb2RUeXBlV2lzZUZvb2QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Sem 5/Asp Dot Net/Zomato App/ZomatoApp/ZomatoApp/Areas/Restaurant/Views/Restaurant/OrderList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUmVzdGF1cmFudFxWaWV3c1xSZXN0YXVyYW50XE9yZGVyTGlzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Sem 5/Asp Dot Net/Zomato App/ZomatoApp/ZomatoApp/Areas/Restaurant/Views/Restaurant/RestaurantList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUmVzdGF1cmFudFxWaWV3c1xSZXN0YXVyYW50XFJlc3RhdXJhbnRMaXN0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Sem 5/Asp Dot Net/Zomato App/ZomatoApp/ZomatoApp/Areas/Restaurant/Views/Restaurant/RestaurantWiseFoodType.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUmVzdGF1cmFudFxWaWV3c1xSZXN0YXVyYW50XFJlc3RhdXJhbnRXaXNlRm9vZFR5cGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Sem 5/Asp Dot Net/Zomato App/ZomatoApp/ZomatoApp/Areas/Restaurant/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUmVzdGF1cmFudFxWaWV3c1xfVmlld0ltcG9ydHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Sem 5/Asp Dot Net/Zomato App/ZomatoApp/ZomatoApp/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Sem 5/Asp Dot Net/Zomato App/ZomatoApp/ZomatoApp/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Sem 5/Asp Dot Net/Zomato App/ZomatoApp/ZomatoApp/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Sem 5/Asp Dot Net/Zomato App/ZomatoApp/ZomatoApp/Views/Shared/_Layout_Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRfTG9naW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Sem 5/Asp Dot Net/Zomato App/ZomatoApp/ZomatoApp/Views/Shared/_Layout_User.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRfVXNlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Sem 5/Asp Dot Net/Zomato App/ZomatoApp/ZomatoApp/Views/Shared/_MyPartialView.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9NeVBhcnRpYWxWaWV3LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Sem 5/Asp Dot Net/Zomato App/ZomatoApp/ZomatoApp/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Sem 5/Asp Dot Net/Zomato App/ZomatoApp/ZomatoApp/Views/User/Cart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxDYXJ0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Sem 5/Asp Dot Net/Zomato App/ZomatoApp/ZomatoApp/Views/User/CartOrderDetail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxDYXJ0T3JkZXJEZXRhaWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Sem 5/Asp Dot Net/Zomato App/ZomatoApp/ZomatoApp/Views/User/Favourate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxGYXZvdXJhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Sem 5/Asp Dot Net/Zomato App/ZomatoApp/ZomatoApp/Views/User/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Sem 5/Asp Dot Net/Zomato App/ZomatoApp/ZomatoApp/Views/User/MST_Order.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxNU1RfT3JkZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Sem 5/Asp Dot Net/Zomato App/ZomatoApp/ZomatoApp/Views/User/MST_OrderDetail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxNU1RfT3JkZXJEZXRhaWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Sem 5/Asp Dot Net/Zomato App/ZomatoApp/ZomatoApp/Views/User/RestaurantByCityName.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxSZXN0YXVyYW50QnlDaXR5TmFtZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Sem 5/Asp Dot Net/Zomato App/ZomatoApp/ZomatoApp/Views/User/UserFoodTypeWiseFood.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxVc2VyRm9vZFR5cGVXaXNlRm9vZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Sem 5/Asp Dot Net/Zomato App/ZomatoApp/ZomatoApp/Views/User/UserRestaurantWiseFoodType.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxVc2VyUmVzdGF1cmFudFdpc2VGb29kVHlwZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Sem 5/Asp Dot Net/Zomato App/ZomatoApp/ZomatoApp/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Sem 5/Asp Dot Net/Zomato App/ZomatoApp/ZomatoApp/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Sem 5/Asp Dot Net/Zomato App/ZomatoApp/ZomatoApp/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-8ug6qq1lyx

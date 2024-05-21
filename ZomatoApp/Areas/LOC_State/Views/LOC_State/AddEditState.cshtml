@@ -1,0 +1,48 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model ZomatoApp.Areas.LOC_State.Models.LOC_StateModel;
+@using ZomatoApp.Areas.LOC_Country.Models;
+
+<div class="mt-4 mb-2">
+    <form asp-area="LOC_State" asp-controller="LOC_State" asp-action="StateList">
+        <button class="btn border border-secondary text-secondary" type="submit">Back</button>
+    </form>
+
+</div>
+
+<div class="container border border-gray rounded p-5 shadow">
+
+    <h2><i class="bi bi-gear me-2 pb-5" style="font-size: 25px"></i>State</h2>
+
+    <hr />
+
+    <form class="pt-3" method="post" asp-area="LOC_State" asp-controller="LOC_State" asp-action="SaveState">
+        <div class="col my-4">
+            <input type="text" class="form-control" asp-for="StateName" placeholder="State Name" aria-label="First name">
+            <span asp-validation-for="StateName" class="text-danger"></span>
+        </div>
+
+        <div class="col my-4">
+            <select asp-for="CountryID" class="form-control">
+                <option>Select Country</option>
+                @foreach (LOC_CountryDropDownModel cm in ViewBag.CountryList)
+                {
+                    <option value = "@cm.CountryID">@cm.CountryName</option>
+                }
+            </select>
+            <span asp-validation-for="CountryID" class="text-danger"></span>
+        </div>
+
+        <div class="mt-4">
+
+            <input type="hidden" asp-for="StateID" />
+            <button class="btn btn-primary" type="submit">Submit</button>
+
+        </div>
+
+
+    </form>
+
+</div>

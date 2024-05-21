@@ -1,0 +1,213 @@
+﻿@using System.Data;
+@{
+    Layout = "~/Views/Shared/_Layout_User.cshtml";
+    ViewData["Title"] = "User Page";
+}
+
+<style>
+
+    .food-container{
+
+        margin: 200px 0px 100px 0px;
+    }
+
+    .card-container {
+        width: 230px;
+        height: 350px;
+        position: relative;
+        border: 2px solid #ced6e0;
+        border-radius: 20px;
+        background-color: #f1f2f6;
+        background-color: rgba(240, 240, 240, 0.25);
+        padding: 13px;
+    }
+
+    .image-container {
+        width: 100%;
+        height: 150px;
+        border-radius: 5px;
+        position: relative;
+        overflow: hidden;
+    }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            object-fit: contain;
+        }
+
+    .foodName {
+        width: 100px;
+        font-size: 16px;
+        font-weight: 700;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .staus-cnotainer {
+        margin: 2px 0px;
+    }
+
+    .status {
+        color: #a4b0be;
+        font-size: 10px;
+    }
+
+    .vegiterian {
+        width: 15px;
+        height: 15px;
+        border: 2px solid rgba(10, 150, 10, 0.8);
+        border-radius: 2px;
+        position: absolute;
+        top: 10px;
+        left: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .veg-circle {
+        width: 6px;
+        height: 6px;
+        background-color: rgba(10, 150, 10, 0.8);
+        border-radius: 50%;
+    }
+
+    .vegiteriannon {
+        width: 15px;
+        height: 15px;
+        border: 2px solid rgba(150, 10, 10, 0.8);
+        border-radius: 2px;
+        position: absolute;
+        top: 10px;
+        left: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .vegnon-circle {
+        width: 5px;
+        height: 5px;
+        background-color: rgba(150, 10, 10, 0.8);
+        border-radius: 50%;
+    }
+
+    .description {
+        height: 35px;
+        font-size: 13px;
+    }
+
+    .alert-container {
+        width: 100%;
+        height: 60px;
+    }
+
+    .food-button {
+        width: auto;
+        height: 30px;
+        border: 2px solid rgba(50, 80, 150, 0.5);
+        border-radius: 10px;
+        background-color: rgba(240, 240, 240, 0.25);
+        backdrop-filter: blur(40px);
+        margin: 0px 10px 0px 0px;
+        font-size: 10px;
+    }
+
+</style>
+
+@if(TempData["CartItem"] != null)
+{
+    <div class="alert alert-primary">@TempData["CartItem"]</div>
+
+}
+
+<div class="food-container d-flex justify-content-center align-items-center flex-wrap">
+
+    @foreach(DataRow dr in Model.Rows)
+    {
+        <div class="card-container shadow-sm mx-4 mb-5">
+
+            <div class="image-container">
+
+                <img src=@dr["FoodImage"] />
+
+            </div>
+            @if (Convert.ToBoolean(dr["IsVegiterian"]))
+            {
+
+                <div class="vegiterian">
+                    <div class="veg-circle"></div>
+                </div>
+
+            }
+            else
+            {
+                <div class="vegiteriannon">
+                    <div class="vegnon-circle"></div>
+                </div>
+            }
+            <div class="d-flex justify-content-between align-items-center mt-2">
+
+                <p class="foodName">@dr["FoodName"]</p>
+                <p>@dr["Price"]</p>
+
+            </div>
+            <div class="d-flex mt-1">
+                <i class="bi bi-star" style="color: rgba(200 , 30 , 50 , 0.8)"></i>
+                <p class="ms-2">@dr["Review"]</p>
+
+            </div>
+            <div class="staus-cnotainer">
+
+                @if (Convert.ToBoolean(dr["IsActive"]))
+                {
+                    <p class="status">Available</p>
+                }
+                else
+                {
+                    <p class="status">Not Available</p>
+                }
+
+            </div>
+            <div class="description-container mt-2">
+
+                <p class="description">@dr["Description"]</p>
+
+            </div>
+
+            <div class="d-flex mt-2">
+                <form method="post" asp-controller="User" asp-action="MST_OrderDetail">
+                    <input type="hidden" name="RestaurantID" value="@Convert.ToInt32(dr["RestaurantID"])" />
+                    <input type="hidden" name="FoodTypeID" value="@Convert.ToInt32(dr["FoodTypeID"])" />
+                    <input type="hidden" name="Price" value="@Convert.ToInt32(dr["Price"])" />
+                    <input type="hidden" name="FoodID" value="@Convert.ToInt32(dr["FoodID"])" />
+                    <button type="submit" class="food-button"><i class="bi bi-pen me-1" style=""></i>Order now</button>
+                </form>
+                <form method="post" asp-controller="User" asp-action="CartInsert">
+                    <input type="hidden" name="FoodID" value="@Convert.ToInt32(dr["FoodID"])" />
+                    <button type="submit" class="food-button"><i class="bi bi-trash me-1" style=""></i>Add to cart</button>
+                </form>
+            </div>
+
+        </div>
+    }
+
+</div>
+
+@section Scripts{
+
+    <script>
+
+        window.setTimeout(function (){
+
+            $(".alert").fadeTo(500, 0).slideUp(1000, function(){
+                $(this).remove();
+            });
+
+        }, 1000)
+
+    </script>
+
+}

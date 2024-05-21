@@ -1,0 +1,509 @@
+﻿@using System.Data;
+@{
+    Layout = "~/Views/Shared/_Layout_User.cshtml";
+    ViewData["Title"] = "User Page";
+}
+@model ZomatoApp.Models.FavourateViewModel;
+@using ZomatoApp.Areas.FoodType.Models;
+@using ZomatoApp.Areas.Restaurant.Models;
+
+<style>
+
+    .favourate-container{
+
+        margin: 150px auto;
+
+    }
+
+    .nav-link.active{
+
+        background-color: rgba(200 , 150 , 100 , 0.8);
+        color: #010101;
+
+    }
+
+    ul.nav li > .nav-link.active {
+        
+        background-color: transparent;
+        color: orange;
+        outline: none;
+        border: 2px solid transparent;
+        border-bottom-color: orange;
+        transition: all 0.2s linear;
+    }
+
+    .card-container{
+
+        width: 500px;
+        border: 1px solid rgba(10 , 10 , 10 , 0.5);
+        border-radius: 15px;
+        padding: 10px;
+    }
+
+    .image-container{
+
+        width: 200px;
+        height: auto;
+        /*margin: 5px 0px;*/
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 0px 10px 50px 0px;
+        box-shadow: 5px 0px 20px 2px rgba(100, 80, 90, 0.3);
+        position: relative;
+        overflow: hidden;
+
+    }
+
+    .image-container img{
+
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        position: absolute;
+
+    }
+
+    .content{
+
+        width: calc(100% - 60px);
+        position: relative;
+    }
+
+    .rating-container{
+
+        display: inline-block; 
+        color: transparent;
+        background-image: linear-gradient(90deg, yellow, rgba(0, 0, 0, 0.2));
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+
+    }
+
+    .favourate-icon-container{
+
+        width: 20px;
+        height: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: rgba(255, 100, 10, 0.8);
+        position: absolute;
+        top: 10%;
+        right: 10%;
+        /*border: 1px solid rgba(10, 10, 10, 0.5);*/
+        border-radius: 50%;
+
+    }
+
+</style>
+
+<div class="container p-5 favourate-container">
+
+    @*<form asp-area="" asp-controller="">*@
+
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="pills-home-tab" asp-action="" data-bs-toggle="pill" data-bs-target="#pills-home" type="submit" role="tab" aria-controls="pills-home" aria-selected="true">Restaurant</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">FoodType</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Food</button>
+            </li>
+
+        </ul>
+
+    @*</form>*@
+
+    <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
+
+            <h2>Restaurant</h2>
+            <div class="d-flex justify-content-start align-items-center flex-wrap">
+
+                @if (Model.FavourateRestaurantList != null)
+                {
+                    @foreach (var dr in Model.FavourateRestaurantList)
+                    {
+
+                        <div class="card mb-4 me-5" style="width: 400px; max-width: 500px;">
+                            <div class="row g-0">
+                                <div class="col p-0 image-container d-flex justify-content-center align-items-center">
+                                    <img src="@Url.Content(dr.RestaurantImage.ToString())" class="img-fluid rounded-start h-100" alt="...">
+                                </div>
+                                <div class="col-md-8 ps-2">
+                                    <div class="card-body">
+                                        <h5 class="card-title mb-1">@dr.RestaurantName</h5>
+                                        <div class="card-text"><small>- @dr.CityName</small></div>
+                                        <div class="rating-container">
+
+                                            <style>
+
+                                                .rating {
+                                                    position: relative;
+                                                    appearance: none;
+                                                    color: transparent;
+                                                    width: auto;
+                                                    display: inline-block;
+                                                    vertical-align: baseline;
+                                                    background-color: green;
+                                                }
+
+                                                    .rating::before {
+                                                        content: '★★★★★';
+                                                        position: absolute;
+                                                        top: 0;
+                                                        left: 0;
+                                                        color: rgba(0, 0, 0, 0.2);
+                                                        --percentage: calc(@dr.Rating/5 * 100%);
+                                                        background-image: linear-gradient(90deg, rgba(255, 100, 10, 0.8) var(--percentage), rgba(0, 0, 0, 0.2) var(--percentage));
+                                                        -webkit-text-fill-color: transparent;
+                                                        -webkit-background-clip: text;
+                                                    }
+
+                                            </style>
+                                            <meter class="rating" min="0" max="10" value=@dr.Rating></meter>
+                                        </div>
+                                        <p class="card-text"><small class="text-body-secondary">@Convert.ToDateTime(dr.OpeningTime).ToLongTimeString() - @Convert.ToDateTime(dr.ClosingTime).ToLongTimeString()</small></p>
+                                        <div class="demo-container">
+
+                                            <form asp-area="" asp-controller="User" asp-action="ChangeFavourate">
+                                                @if (Convert.ToBoolean(dr.IsFavourate) == true)
+                                                {
+                                                    <input type="hidden" name="RestaurantID" value="@Convert.ToInt32(dr.RestaurantID)" />
+                                                    <input type="hidden" name="IsFavourate" value="false" />
+                                                    <button class="btn favourate-icon-container"><i class="fa-solid fa-heart"></i></button>
+                                                }
+                                                else
+                                                {
+                                                    <input type="hidden" name="RestaurantID" value="@Convert.ToInt32(dr.RestaurantID)" />
+                                                    <input type="hidden" name="IsFavourate" value="true" />
+                                                    <button class="btn favourate-icon-container"><i class="fa-regular fa-heart"></i></button>
+                                                }
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        @*<div class="card-container d-flex mb-4 me-4">
+
+                            <div class="image-container">
+
+                                @if (!string.IsNullOrEmpty(dr.RestaurantImage))
+                                {
+                                    <img src=@Url.Content(dr.RestaurantImage.ToString()) />
+                                }
+                                else
+                                {
+                                    <p>No image available</p>
+                                }
+
+                            </div>
+
+                            <div class="ms-4 content">
+
+                                <p class="fw-bold">@dr.RestaurantName</p>
+                                <div class="rating-container">
+
+                                    <style>
+
+                                        .rating {
+                                            position: relative;
+                                            appearance: none;
+                                            color: transparent;
+                                            width: auto;
+                                            display: inline-block;
+                                            vertical-align: baseline;
+                                            background-color: green;
+                                        }
+
+                                            .rating::before {
+                                                content: '★★★★★';
+                                                position: absolute;
+                                                top: 0;
+                                                left: 0;
+                                                color: rgba(0, 0, 0, 0.2);
+                                                --percentage: calc(@dr.Rating/5 * 100%);
+                                                background-image: linear-gradient(90deg, rgba(255, 100, 10, 0.8) var(--percentage), rgba(0, 0, 0, 0.2) var(--percentage));
+                                                -webkit-text-fill-color: transparent;
+                                                -webkit-background-clip: text;
+                                            }
+
+                                    </style>
+                                    <meter class="rating" min="0" max="10" value=@dr.Rating></meter>
+                                </div>
+                                <div class="demo-container">
+
+                                    <form asp-area="" asp-controller="User" asp-action="ChangeFavourate">
+                                        @if (Convert.ToBoolean(dr.IsFavourate) == true)
+                                        {
+                                            <input type="hidden" name="RestaurantID" value="@Convert.ToInt32(dr.RestaurantID)" />
+                                            <input type="hidden" name="IsFavourate" value="false" />
+                                            <button class="btn favourate-icon-container"><i class="fa-solid fa-heart"></i></button>
+                                        }
+                                        else
+                                        {
+                                            <input type="hidden" name="RestaurantID" value="@Convert.ToInt32(dr.RestaurantID)" />
+                                            <input type="hidden" name="IsFavourate" value="true" />
+                                            <button class="btn favourate-icon-container"><i class="fa-regular fa-heart"></i></button>
+                                        }
+                                    </form>
+
+                                </div>
+                            </div>
+
+                        </div>*@
+                    }
+                }
+                else
+                {
+                    <img src="~/User/img/Animation.gif" />
+                }
+
+            </div>
+
+        </div>
+        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
+
+            <h2>FoodType</h2>
+            <div class="d-flex justify-content-start align-items-center flex-wrap">
+
+                @if (Model.FavourateFoodTypeList != null)
+                {
+                    @foreach (var dr in Model.FavourateFoodTypeList)
+                    {
+
+                        <div class="card mb-3 me-4" style="width: 500px; height: 100px; max-width: 540px;">
+                            <div class="row g-0">
+                                <div class="col image-container p-0" style="height: 100px;">
+                                    <img src="@Url.Content(dr.FoodTypeImage.ToString())" class="img-fluid rounded-start h-100" alt="...">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">@dr.FoodTypeName</h5>
+
+                                        @*<p class="card-text"><small class="text-body-secondary">@dr.OpeningTime - @dr.ClosingTime</small></p>*@
+                                        <div class="demo-container">
+
+                                            <form asp-area="" asp-controller="User" asp-action="ChangeFavourate">
+                                                @if (Convert.ToBoolean(dr.IsFavourate) == true)
+                                                {
+                                                    <input type="hidden" name="RestaurantID" value="@Convert.ToInt32(dr.RestaurantID)" />
+                                                    <input type="hidden" name="IsFavourate" value="false" />
+                                                    <button class="btn favourate-icon-container"><i class="fa-solid fa-heart"></i></button>
+                                                }
+                                                else
+                                                {
+                                                    <input type="hidden" name="RestaurantID" value="@Convert.ToInt32(dr.RestaurantID)" />
+                                                    <input type="hidden" name="IsFavourate" value="true" />
+                                                    <button class="btn favourate-icon-container"><i class="fa-regular fa-heart"></i></button>
+                                                }
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        @*<div class="card-container d-flex mb-4 me-4">
+
+                            <div class="image-container">
+
+                                <img src=@Url.Content(dr.FoodTypeImage.ToString()) />
+
+                            </div>
+
+                            <div class="ms-4 content">
+
+                                <p class="fw-bold">@dr.FoodTypeName</p>
+                                <div class="demo-container">
+
+                                    <form asp-area="" asp-controller="User" asp-action="ChangeFavourate">
+                                        @if (Convert.ToBoolean(dr.IsFavourate) == true)
+                                        {
+                                            <input type="hidden" name="RestaurantID" value="@Convert.ToInt32(dr.FoodTypeID)" />
+                                            <input type="hidden" name="IsFavourate" value="false" />
+                                            <button class="btn favourate-icon-container"><i class="fa-solid fa-heart"></i></button>
+                                        }
+                                        else
+                                        {
+                                            <input type="hidden" name="RestaurantID" value="@Convert.ToInt32(dr.FoodTypeID)" />
+                                            <input type="hidden" name="IsFavourate" value="true" />
+                                            <button class="btn favourate-icon-container"><i class="fa-regular fa-heart"></i></button>
+                                        }
+                                    </form>
+
+                                </div>
+                            </div>
+
+                        </div>*@
+                    }
+                }
+                else
+                {
+                    <img src="~/User//img/Animation.gif" />
+                }
+
+            </div>
+
+        </div>
+        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0">
+
+            <h2>Food</h2>
+            <div class="d-flex justify-content-start align-items-center flex-wrap">
+
+                @if (Model.FavourateFoodList != null)
+                {
+                    @foreach (var dr in Model.FavourateFoodList)
+                    {
+
+                        <div class="card mb-3 me-4" style="width: 500px; height: 100px; max-width: 540px;">
+                            <div class="row g-0">
+                                <div class="col image-container p-0" style="height: 100px;">
+                                    <img src="@Url.Content(dr.FoodImage.ToString())" class="img-fluid rounded-start h-100" alt="...">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">@dr.FoodName</h5>
+                                        <div class="rating-container">
+
+                                            <style>
+
+                                                .rating {
+                                                    position: relative;
+                                                    appearance: none;
+                                                    color: transparent;
+                                                    width: auto;
+                                                    display: inline-block;
+                                                    vertical-align: baseline;
+                                                    background-color: green;
+                                                }
+
+                                                    .rating::before {
+                                                        content: '★★★★★';
+                                                        position: absolute;
+                                                        top: 0;
+                                                        left: 0;
+                                                        color: rgba(0, 0, 0, 0.2);
+                                                        --percentage: calc(@dr.Review/5 * 100%);
+                                                        background-image: linear-gradient(90deg, rgba(255, 100, 10, 0.8) var(--percentage), rgba(0, 0, 0, 0.2) var(--percentage));
+                                                        -webkit-text-fill-color: transparent;
+                                                        -webkit-background-clip: text;
+                                                    }
+
+                                                .rating1 {
+                                                    --rating: calc(@dr.Review / 10 * 100%);
+                                                    width: 100px;
+                                                    height: 10px;
+                                                    background-image: linear-gradient(90deg, rgba(255, 100, 10, 0.8) var(--rating), transparent);
+                                                }
+
+                                            </style>
+                                            <meter class="rating" min="0" max="10" value=@dr.Review></meter>
+
+                                        </div>
+                                        @*<p class="card-text"><small class="text-body-secondary">@dr.OpeningTime - @dr.ClosingTime</small></p>*@
+                                        <div class="rating1"></div>
+                                        <div class="demo-container">
+
+                                            <form asp-area="" asp-controller="User" asp-action="ChangeFavourate">
+                                                @if (Convert.ToBoolean(dr.IsFavourate) == true)
+                                                {
+                                                    <input type="hidden" name="RestaurantID" value="@Convert.ToInt32(dr.RestaurantID)" />
+                                                    <input type="hidden" name="IsFavourate" value="false" />
+                                                    <button class="btn favourate-icon-container"><i class="fa-solid fa-heart"></i></button>
+                                                }
+                                                else
+                                                {
+                                                    <input type="hidden" name="RestaurantID" value="@Convert.ToInt32(dr.RestaurantID)" />
+                                                    <input type="hidden" name="IsFavourate" value="true" />
+                                                    <button class="btn favourate-icon-container"><i class="fa-regular fa-heart"></i></button>
+                                                }
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        @*<div class="card-container d-flex mb-4 me-4">
+
+                            <div class="image-container">
+
+                                <img src=@Url.Content(dr.FoodImage.ToString()) />
+
+                            </div>
+
+                            <div class="ms-4 content">
+
+                                <p class="fw-bold">@dr.FoodName</p>
+                                <div class="rating-container">
+
+                                    <style>
+
+                                        .rating {
+                                            position: relative;
+                                            appearance: none;
+                                            color: transparent;
+                                            width: auto;
+                                            display: inline-block;
+                                            vertical-align: baseline;
+                                            background-color: green;
+                                        }
+
+                                            .rating::before {
+                                                content: '★★★★★';
+                                                position: absolute;
+                                                top: 0;
+                                                left: 0;
+                                                color: rgba(0, 0, 0, 0.2);
+                                                --percentage: calc(@dr.Review/5 * 100%);
+                                                background-image: linear-gradient(90deg, rgba(255, 100, 10, 0.8) var(--percentage), rgba(0, 0, 0, 0.2) var(--percentage));
+                                                -webkit-text-fill-color: transparent;
+                                                -webkit-background-clip: text;
+                                            }
+
+                                    </style>
+                                    <meter class="rating" min="0" max="10" value=@dr.Review></meter>
+
+                                </div>
+                                <div class="demo-container">
+
+                                    <form asp-area="" asp-controller="User" asp-action="ChangeFavourate">
+                                        @if (Convert.ToBoolean(dr.IsFavourate) == true)
+                                        {
+                                            <input type="hidden" name="RestaurantID" value="@Convert.ToInt32(dr.FoodID)" />
+                                            <input type="hidden" name="IsFavourate" value="false" />
+                                            <button class="btn favourate-icon-container"><i class="fa-solid fa-heart"></i></button>
+                                        }
+                                        else
+                                        {
+                                            <input type="hidden" name="RestaurantID" value="@Convert.ToInt32(dr.FoodID)" />
+                                            <input type="hidden" name="IsFavourate" value="true" />
+                                            <button class="btn favourate-icon-container"><i class="fa-regular fa-heart"></i></button>
+                                        }
+                                    </form>
+
+                                </div>
+                            </div>
+
+                        </div>*@
+                    }
+                }
+                else
+                {
+                    <img src="~/User/img/Animation.gif" />
+                }
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

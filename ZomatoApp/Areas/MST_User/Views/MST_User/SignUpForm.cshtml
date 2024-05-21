@@ -1,0 +1,210 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_Login.cshtml";
+}
+@using ZomatoApp.Areas.MST_User.Models;
+@model MST_UserModel
+@using ZomatoApp.Areas.LOC_Country.Models;
+@using ZomatoApp.Areas.LOC_State.Models;
+@using ZomatoApp.Areas.LOC_City.Models;
+<main>
+    <div class="container">
+
+        <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-12 d-flex flex-column align-items-center justify-content-center">
+
+                        <div class="d-flex justify-content-center py-4">
+                            <a href="index.html" class="logo d-flex align-items-center w-auto">
+                                <img src="assets/img/logo.png" alt="">
+                                <span class="d-none d-lg-block">Zomato</span>
+                            </a>
+                        </div><!-- End Logo -->
+
+                        <div class="card mb-3">
+
+                            <div class="card-body">
+
+                                <div class="pt-4 pb-2">
+                                    <h5 class="card-title text-center pb-0 fs-4">Sign Up to Your Account</h5>
+                                    <p class="text-center small">Enter your detail to continue</p>
+                                </div>
+
+                                <form method="post" class="row g-3 needs-validation" asp-area="MST_User" asp-controller="MST_User" asp-action="Register">
+
+                                    <div class="col-4">
+                                        <label for="yourUsername" class="form-label">FirstName</label>
+                                        <input type="text" asp-for="FirstName" class="form-control" id="yourUsername" placeholder="Enter firstname" required>
+                                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="yourUsername" class="form-label">LastName</label>
+                                        <input type="text" asp-for="LastName" class="form-control" id="yourUsername" placeholder="Enter lastname" required>
+                                        <span asp-validation-for="LastName" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="yourUsername" class="form-label">PhoneNo</label>
+                                        <input type="number" asp-for="PhoneNo" class="form-control" id="yourUsername" placeholder="Enter phoneno" required>
+                                        <span asp-validation-for="PhoneNo" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="yourUsername" class="form-label">Username</label>
+                                        <input type="text" asp-for="UserName" class="form-control" id="yourUsername" placeholder="Enter username" required>
+                                        <span asp-validation-for="UserName" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="yourUsername" class="form-label">Email</label>
+                                        <input type="email" asp-for="Email" class="form-control" id="yourUsername" placeholder="Enter email" required>
+                                        <span asp-validation-for="Email" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="yourPassword" class="form-label">Password</label>
+                                        <input type="password" asp-for="Password" class="form-control" id="yourPassword" placeholder="Enter password" required>
+                                        <span asp-validation-for="Password" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <label for="yourUsername" class="form-label">BirthDate</label>
+                                        <input type="date" asp-for="BirthDate" class="form-control" id="yourUsername" required>
+                                        <span asp-validation-for="BirthDate" class="text-center"></span>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <label for="yourUsername" class="form-label">Gender</label>
+                                        <div class="d-flex">
+                                            <label class="form-control me-2" for="male">
+                                                <input type="radio" asp-for="Gender" id="male" name="Gender" value="Male" required>
+                                                <span>Male</span>
+                                            </label>
+                                            <label class="form-control me-1" for="female">
+                                                <input type="radio" asp-for="Gender" id="female" name="Gender" value="Female" required>
+                                                <span>Female</span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="yourUsername" class="form-label">Country</label>
+                                            <select asp-for="CountryID" class="form-control" onchange="funOnStateChange()" asp-items="@(new SelectList(ViewBag.CountryList,"CountryID","CountryName"))">
+                                                <option value="">Select Country</option>
+
+                                            </select>
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="yourUsername" class="form-label">State</label>
+                                        <select asp-for="StateID" class="form-control" onchange="funOnCityChange()">
+                                            <option value="">Select State</option>
+
+
+                                        </select>
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label class="form-label">City</label>
+                                        <select class="form-control" asp-for="CityID" id="selectedCity">
+                                            <option value="">Select City</option>
+
+                                        </select>
+                                        
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="remember" value="true" id="rememberMe">
+                                            <label class="form-check-label" for="rememberMe">Remember me</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <button class="btn btn-primary w-100" type="submit">Sign Up</button>
+                                    </div>
+                                    <div class="col-12">
+                                        <p class="small mb-0">Login to your account? <a asp-area="MST_User" asp-controller="MST_User" asp-action="LoginForm">Log in to account</a></p>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+</main><!-- End #main -->
+@section Scripts{
+
+    <script>
+        function funOnStateChange() {
+            var CountryID = $("#CountryID").val();
+            //alert("Hello");
+            $("#StateID").empty();
+            $("#StateID").append($("<option></option>").val("").html("Select State"));
+
+            if (CountryID !== "") {
+
+                $.ajax(
+                    {
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: "@Url.Action("StatesForComboBox","LOC_City", new {area = "LOC_City"})" + "?&CountryID=" + CountryID,
+                        data: {},
+                        dataType: "json",
+                        success: function (Result) {
+
+                            $.each(Result, function (key, value) {
+                                console.log(value)
+                                $("#StateID").append($("<option></option>").val(value.stateID).html(value.stateName));
+                            });
+                        },
+                        error: function (err) {
+                            console(err)
+                            alert(err);
+                        }
+
+                    }
+                )
+            }
+        }
+
+        function funOnCityChange() {
+            var StateID = $("#StateID").val();
+
+            $("#selectedCity").empty();
+            $("#selectedCity").append($("<option></option>").val("").html("Select City"));
+            //alert(StateID)
+            if (CountryID !== "") {
+                //alert("Hello"3x`x)
+                $.ajax(
+                    {
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: "@Url.Action("CityForComboBox","MST_User")" + "?&StateID=" + StateID,
+                        data: {},
+                        dataType: "json",
+                        success: function (Result) {
+                            //alert("Hello")
+                            console.log("Result = ",Result);
+                            $.each(Result, function (key, value) {
+
+                                $("#selectedCity").append($("<option></option>").val(value.cityID).html(value.cityName));
+                            });
+                        },
+                        error: function (err) {
+                            alert("Error white fetch data");
+                        }
+
+                    }
+                )
+            }
+        }
+    </script>
+
+}

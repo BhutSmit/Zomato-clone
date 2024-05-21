@@ -1,0 +1,79 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model ZomatoApp.Areas.Food.Models.FoodModel;
+@using Microsoft.AspNetCore.Http;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+
+<div class="mt-4 mb-2">
+    <form asp-area="Food" asp-controller="Food" asp-action="FoodTypeWiseFood">
+        <input type="hidden" name="FoodTypeID" value="@HttpContextAccessor.HttpContext.Session.GetInt32("FoodTypeID")" />
+        <button class="btn border border-secondary text-secondary" type="submit">Back</button>
+    </form>
+
+</div>
+
+<div class="container border border-gray rounded p-5 shadow">
+
+    <h2><i class="bi bi-gear me-2 pb-5" style="font-size: 25px"></i>Food</h2>
+
+    <hr />
+
+    <form class="pt-3" method="post" asp-area="Food" asp-controller="Food" asp-action="SaveFood">
+
+        <div class="col my-4">
+            <input type="text" class="form-control" asp-for="FoodName" placeholder="Food Name" aria-label="First name">
+            <span asp-validation-for="FoodName" class="text-danger"></span>
+        </div>
+
+        @*<div class="col my-4">
+            <input type="text" class="form-control" asp-for="RestaurantID" placeholder="Restaurant" aria-label="Last name">
+            <span asp-validation-for="RestaurantID" class="text-danger"></span>
+        </div>*@
+
+        <div class="col my-4">
+            <input type="text" class="form-control" asp-for="Description" placeholder="Description" aria-label="Last name">
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <div class="col my-4">
+            <input type="text" class="form-control" asp-for="Price" placeholder="Price" aria-label="Last name">
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+
+        <div class="col my-4">
+            <input type="text" class="form-control" asp-for="IsVegiterian" placeholder="IsVegiterian" aria-label="Last name">
+            <span asp-validation-for="IsVegiterian" class="text-danger"></span>
+        </div>
+
+        <div class="col my-4">
+            <input type="text" class="form-control" asp-for="FoodImage" placeholder="FoodImage" aria-label="Last name">
+            <span asp-validation-for="FoodImage" class="text-danger"></span>
+        </div>
+
+        @*<div class="col my-4">
+            <input type="text" class="form-control" asp-for="FoodTypeID" placeholder="FoodTypeID" aria-label="Last name">
+            <span asp-validation-for="FoodTypeID" class="text-danger"></span>
+        </div>*@
+
+        <div class="col my-4">
+            <input type="text" class="form-control" asp-for="IsActive" placeholder="IsActive" aria-label="Last name">
+            <span asp-validation-for="IsActive" class="text-danger"></span>
+        </div>
+
+        <div class="col my-4">
+            <input type="text" class="form-control" asp-for="Review" placeholder="Review" aria-label="Last name">
+            <span asp-validation-for="Review" class="text-danger"></span>
+        </div>
+
+        <div class="col mt-4">
+
+            <input type="hidden" asp-for="FoodID" />
+            <button class="btn btn-primary" type="submit">Submit</button>
+
+        </div>
+
+    </form>
+
+</div>

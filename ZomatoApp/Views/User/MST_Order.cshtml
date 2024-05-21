@@ -1,0 +1,409 @@
+﻿@using System.Data;
+@{
+    Layout = "~/Views/Shared/_Layout_User.cshtml";
+    ViewData["Title"] = "User Page";
+}
+
+<style>
+
+    .order-container {
+        margin: 200px 0px 100px 0px;
+    }
+
+    .card-container-outer {
+        width: 100%;
+        /*filter: drop-shadow(0px 3px 10px rgba(255, 100, 10, 0.2));*/
+        position: relative;
+        padding: 20px 0px 0px 0px;
+        border: 1px solid rgba(200, 200, 200, 0.8);
+        border-radius: 5px;
+        /*box-shadow: 0px 5px 20px 0px rgba(10, 10, 10, 0.2);*/
+    }
+
+        .card-container-outer:after {
+            content: "";
+            width: 100%;
+            height: auto;
+            background-color: rgba(10, 10, 10, 0.1);
+            position: absolute;
+            top: -3%;
+            left: 0;
+            z-index: -1;
+            border-radius: 10px;
+            /*clip-path: polygon(2% 0, 70% 0%, 100% 0, 100% 87%, 98% 100%, 30% 100%, 0 100%, 0 13%);*/
+            /*filter: drop-shadow(255, 100, 10, 0.2);*/
+        }
+
+    .card-container {
+        width: 100%;
+        background-color: #ffffff;
+        border: 1px solid rgba(10, 10, 10, 0.2);
+        border-radius: 10px;
+        /*padding: 20px;*/
+        position: relative;
+        /*background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);*/
+        /*box-shadow: 0px 5px 20px 0px rgba(10, 10, 10, 0.2);*/
+        /*box-shadow: 0px -2px 20px 0px rgba(0, 0, 0, 0.2);*/
+        /*clip-path: polygon(2% 0, 70% 0%, 100% 0, 100% 87%, 98% 100%, 30% 100%, 0 100%, 0 13%);*/
+        overflow: hidden;
+    }
+
+    .image-container-outer {
+        width: 160px;
+        height: 115px;
+        position: relative;
+        background-image: linear-gradient(90deg, rgba(255, 100, 10, 0.2), rgba(255, 255, 255, 0.8));
+        background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+        /*background-color: #efefef;*/
+        /*clip-path: polygon(0 0, 100% 0%, 80% 100%, 0% 100%);*/
+        transform: skewX(-15deg) translateX(-10px);
+        filter: drop-shadow(5px 2px 10px rgba(10, 50, 10, 0.2));
+    }
+
+        .image-container-outer:after {
+            content: "";
+            width: 145px;
+            height: 115px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+    .image-container {
+        width: 100px;
+        height: 100px;
+        /*border: 1px solid rgba(10, 10, 10, 0.2);*/
+        border-radius: 10px;
+        position: relative;
+        transform: skewX(15deg);
+        overflow: hidden;
+    }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            padding: 10px;
+            object-fit: cover;
+            position: absolute;
+        }
+
+    .content {
+        /*width: calc(100% - 60px);*/
+        position: relative;
+        padding: 20px;
+    }
+
+    .rating-container {
+        display: inline-block;
+        color: transparent;
+        background-image: linear-gradient(90deg, yellow, rgba(0, 0, 0, 0.2));
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+    }
+
+    .favourate-icon-container {
+        width: 20px;
+        height: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: pink;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        /*border: 1px solid rgba(10, 10, 10, 0.5);*/
+        border-radius: 50%;
+    }
+
+    .description {
+        height: 35px;
+        font-size: 13px;
+    }
+
+    .staus-cnotainer {
+        margin: 2px 0px;
+    }
+
+    .status {
+        color: #a4b0be;
+        font-size: 13px;
+    }
+
+    .order-info {
+        background-color: rgba(255, 100, 50, 0.2);
+        padding: 8px 10px;
+        outline: 2px solid rgba(255, 100, 50, 0.5);
+        border: 2px solid rgba(255, 255, 255, 0.8);
+        border-radius: 15px;
+        margin: 0px 0px 10px 0px;
+    }
+
+    .rating {
+        color: #efefef;
+        background-color: rgba(255, 100, 10, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 10px;
+        font-weight: 500;
+        padding: 2px;
+        border-radius: 10px;
+    }
+
+    .container1 {
+        border: 2px solid rgba(10, 10, 10, 0.2);
+        border-radius: 10px;
+        padding: 10px;
+    }
+
+    .total-count-container{
+
+        border: 2px solid transparent;
+        border-left-color: rgba(255, 100, 10, 0.5);
+        border-radius: 10px;
+        padding: 10px;
+
+    }
+
+    .total-count{
+
+        width: 100%;
+        background-color: rgba(255, 100, 10, 0.2);
+        border: 1px solid rgba(255, 100, 10, 0.2);
+        border-radius: 5px;
+        padding: 5px 10px;
+        
+    }
+
+    .sub-total-container{
+
+        width: 30px;
+        height: 30px;
+        border: 1px solid rgba(255, 100, 10, 0.5);
+        border-radius: 50%;
+        /*padding: 10px;*/
+        position: relative;
+        text-align: center;
+
+    }
+
+    .sub-total-container:after{
+
+        content: "";
+        width: 75px;
+        height: 2px;
+        background-color: rgba(255, 100, 10, 0.5);
+        border-radius: 2px;
+        position: absolute;
+        top: 50%;
+        right: 100%;
+        transform: translate(0%, -50%);
+
+    }
+
+    .sub-total-container:before{
+
+        content: "";
+        width: 10px;
+        height: 10px;
+        background-color: rgba(255, 100, 10, 0.5);
+        padding: 5px;
+        border: 1px solid rgba(255, 100, 10, 0.8);
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        right: calc(100% + 60px);
+        transform: translate(-50%, -50%);
+        box-shadow: 0px 0px 25px 5px rgba(255, 100, 10, 0.5);
+
+    }
+
+</style>
+
+<div class="order-container">
+
+    <div class="container visually-hidden">
+
+        <div class="d-flex me-5 mb-5 fw-bold fs-6">
+            <div class="ms-4">Item</div>
+            <div class="ms-auto me-5">Amount</div>
+            <div class="me-5">Qty</div>
+            <div class="me-5">Total</div>
+
+        </div>
+
+    </div>
+
+    <div class="container d-flex justify-content-center align-items-center flex-wrap">
+
+        @{
+            var lastCreated = "";
+            bool date = true;
+            int totalCount = 1;
+            int subCount = 1;
+        }
+
+        @foreach (DataRow dr in Model.Rows)
+        {
+            var currentCreated = Convert.ToDateTime(dr["Created"]).ToLongDateString();
+
+            @*<h1>@(currentCreated == lastCreated) @currentCreated @lastCreated</h1>*@
+
+            bool temp = (currentCreated == lastCreated);
+
+            if (lastCreated != currentCreated)
+            {
+                @: </div>
+                @: </div>
+                date = true;
+                @: <div class="d-flex container">
+                    <div class="total-count-container mt-4 mx-2">
+                        <div class="total-count">@totalCount</div>
+
+                        @{totalCount = totalCount + 1;}
+                    </div>
+                @:<div class="container container1 shadow mt-4">
+                    
+            }
+
+            @*<h1>@(currentCreated == lastCreated) @currentCreated @lastCreated</h1>*@
+
+            if(date){
+
+                <div class="order-info d-inline-block my-4 mx-2">@Convert.ToDateTime(dr["Created"]).ToLongDateString()</div>
+                date = false;
+
+            }
+
+                <div class="d-flex mt-3">
+
+                    <div class="me-2 sub-total-container">
+
+                        <p>@subCount</p>
+
+                        @{subCount += 1;}
+
+                    </div>
+
+                <div class="card-container-outer mb-5">
+
+                    <div class="d-flex justify-content-between align-items-center mx-3">
+
+                        <div class="d-inline-block">@Convert.ToDateTime(dr["Created"]).ToLongTimeString()</div>
+
+                        @if(dr["StatusName"].ToString() == "Pending")
+                        {
+                            <div>
+                                <form method="post" asp-controller="User" asp-action="CancleOrder">
+                                    <input type="hidden" name="OrderID" value="@Convert.ToInt32(dr["OrderID"])" />
+                                    <input type="submit" class="btn btn-danger" value="Cancle" />
+                                </form>
+                        </div>
+                        }
+
+
+                    </div>
+
+                    <div class="d-flex m-3">
+
+                        <div class="text-secondary">Deliver At: @dr["Address"]</div>
+
+                        <div class="ms-auto d-inline-block rounded py-1 px-3 @(dr["StatusName"].ToString() == "Pending" ? "bg-warning" : "bg-success")">@dr["StatusName"]</div>
+
+                    </div>
+
+                    <div class="card-container d-flex justify-content-start align-items-start me-4">
+
+                        <div class="image-container-outer">
+
+                            <div class="image-container mt-2 ms-4">
+
+                            @if (dr["FoodImage"] != null)
+                            {
+                                    <img src=@Url.Content(dr["FoodImage"].ToString()) />
+                            }
+                            else
+                            {
+                                    <p>No image available</p>
+                            }
+
+                            </div>
+
+                        </div>
+
+                        <div class="ms-4 content">
+
+                            <p class="fw-bold fs-6">@dr["FoodName"]</p>
+                        @*<div class="rating-container">
+
+                        <style>
+
+                        .rating {
+                        position: relative;
+                        appearance: none;
+                        color: transparent;
+                        width: auto;
+                        display: inline-block;
+                        vertical-align: baseline;
+                        background-color: green;
+                        }
+
+                        .rating::before {
+                        content: '★★★★★';
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        color: rgba(0, 0, 0, 0.2);
+                        --percentage: calc(@dr["review"]/5 * 100%);
+                        background-image: linear-gradient(90deg, rgba(255, 100, 10, 0.8) var(--percentage), rgba(0, 0, 0, 0.2) var(--percentage));
+                        -webkit-text-fill-color: transparent;
+                        -webkit-background-clip: text;
+                        }
+
+                        </style>
+                        <meter class="rating" min="0" max="10" value=@dr["Review"]></meter>
+                        </div>*@
+                            <div class="rating"><span class="me-1">★</span>@dr["Review"]</div>
+                            <div class="staus-cnotainer">
+
+                            @if (Convert.ToBoolean(dr["IsActive"]))
+                            {
+                                    <p class="status">Available</p>
+                            }
+                            else
+                            {
+                                    <p class="status">Not Available</p>
+                            }
+
+                            </div>
+                        @*<div class="description-container mt-2">
+
+                        <p class="description">@dr["Description"]</p>
+
+                        </div>*@
+                        </div>
+
+                        <div class="d-flex justify-content-evenly align-items-center ms-auto me-5 mt-4 fw-bold">
+
+                            <div class="me-5">@dr["Price"]</div>
+                            <div class="me-5">Qty: @dr["Quantity"]</div>
+                            <div class="me-5">@dr["TotalAmount"]</div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                </div>
+            lastCreated = currentCreated;
+            if (lastCreated != currentCreated)
+            {
+                @:</div>
+            }
+        }
+
+            </div>
+
+        </div>

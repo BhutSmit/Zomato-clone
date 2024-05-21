@@ -1,0 +1,165 @@
+﻿@using System.Data;
+@{
+    Layout = "~/Views/Shared/_Layout_User.cshtml";
+    ViewData["Title"] = "User Page";
+}
+
+<style>
+
+    .card-container{
+
+        margin: 200px 0px 0px 0px;
+
+    }
+
+    .favourate-icon-container {
+        width: 30px;
+        height: 30px;
+        /*position: absolute;*/
+        /*top: 0;*/
+        /*right: 0;*/
+        color: rgba(255, 100, 10, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: transparent;
+        border: 2px solid rgba(255, 100, 10, 0.2);
+        border-radius: 50%;
+    }
+
+    .visit-button{
+
+        color: rgba(255, 100, 10, 0.8);
+        border: 1px solid rgba(255, 100, 10, 0.5);
+        background-color: transparent;
+        padding: 8px 20px;
+        border-radius: 5px 5px 20px 5px;
+        transition: all 0.2s linear;
+
+    }
+
+    .visit-button:hover{
+
+        color: #efefef;
+        background-color: rgba(255, 100, 10, 0.6);
+
+    }
+
+    .rating-container {
+
+        color: #efefef;
+        background-color: rgba(37, 167, 67, 0.9);
+        display: inline-block;
+        padding: 5px 10px;
+        border-radius: 15px;
+        font-size: 10px;
+        font-weight: 700;
+
+    }
+
+</style>
+
+<div class="card-container">
+
+    <section class="exclusive_item_part blog_item_section">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-5">
+                    <div class="section_tittle">
+                        <p>Popular Dishes</p>
+                        <h2>Our Exclusive Items</h2>
+                    </div>
+                </div>
+            </div>
+            @*@if (Model.Rows.Count > 3)
+            {
+            <div class="d-flex justify-content-end align-items-center mb-3">
+            <div class="viewmore-button">Scroll To View More <img src="~/User/img/icon/left_2.svg" alt=""></div>
+            </div>
+            }*@
+            <div class="d-flex justify-content-center align-items-center flex-wrap restaurant-card-container">
+                @foreach (DataRow dr in Model.Rows)
+                {
+                    <div class="col-sm-6 col-lg-4 mb-5">
+                        <div class="single_blog_item">
+                            <div class="single_blog_img position-relative">
+                                <img src="@Url.Content(dr["RestaurantImage"].ToString())" alt="">
+                            </div>
+                            <div class="single_blog_text">
+                                <div class="d-flex justify-content-between align-items-center">
+
+                                    <div class="fs-4">@dr["RestaurantName"]</div>
+
+                                    <div>
+
+                                        <form asp-area="" asp-controller="User" asp-action="ChangeFavourate">
+                                            @if (Convert.ToBoolean(dr["IsFavourate"]))
+                                            {
+                                                <input type="hidden" name="RestaurantID" value="@Convert.ToInt32(dr["RestaurantID"])" />
+                                                <input type="hidden" name="IsFavourate" value="false" />
+                                                <button class="favourate-icon-container"><i class="fa-solid fa-heart"></i></button>
+                                            }
+                                            else
+                                            {
+                                                <input type="hidden" name="RestaurantID" value="@Convert.ToInt32(dr["RestaurantID"])" />
+                                                <input type="hidden" name="IsFavourate" value="true" />
+                                                <button class="favourate-icon-container"><i class="fa-regular fa-heart"></i></button>
+                                            }
+                                        </form>
+
+                                    </div>
+
+                                </div>
+                                @*<style>
+
+                            .rating {
+                            position: relative;
+                            appearance: none;
+                            color: transparent;
+                            width: auto;
+                            display: inline-block;
+                            vertical-align: baseline;
+                            background-color: green;
+                            }
+
+                            .rating::before {
+                            content: '★★★★★';
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            color: rgba(0, 0, 0, 0.2);
+                            --percentage: calc(@dr["Rating"]/5 * 100%);
+                            background-image: linear-gradient(90deg, yellow var(--percentage), rgba(0, 0, 0, 0.2) var(--percentage));
+                            -webkit-text-fill-color: transparent;
+                            -webkit-background-clip: text;
+                            }
+
+                            </style>
+                            <meter class="rating" min="0" max="10" value=@dr["Rating"]></meter>*@
+                                <div class="rating-container mb-2"><span class="me-1">★</span> @dr["Rating"]</div>
+                                <p>@dr["Address"]</p>
+                                <p>@Convert.ToDateTime(dr["OpeningTime"]).ToLongTimeString() - @Convert.ToDateTime(dr["ClosingTime"]).ToLongTimeString()</p>
+                                <div class="d-flex justify-content-start align-items-center mt-4">
+
+                                    <form asp-controller="User" asp-action="UserRestaurantWiseFoodType">
+                                        <input type="hidden" name="RestaurantID" value="@Convert.ToInt32(dr["RestaurantID"])" />
+                                        <input type="hidden" name="RestaurantName" value="@dr["RestaurantName"]" />
+                                        <input type="hidden" name="Address" value="@dr["Address"]" />
+                                        <input type="hidden" name="OpeningTime" value="@Convert.ToDateTime(dr["OpeningTime"]).ToLongTimeString()" />
+                                        <input type="hidden" name="ClosingTime" value="@Convert.ToDateTime(dr["ClosingTime"]).ToLongTimeString()" />
+                                        <input type="submit" class="visit-button" value="Visit Now" />
+                                    </form>
+
+                                    <a href="#" class="btn_3 ms-4 mt-0">Read More <img src="~/User/img/icon/left_2.svg" alt=""></a>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+
+</div>

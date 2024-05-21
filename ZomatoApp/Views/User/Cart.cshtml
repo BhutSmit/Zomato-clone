@@ -1,0 +1,420 @@
+﻿@using System.Data;
+@{
+    Layout = "~/Views/Shared/_Layout_User.cshtml";
+    ViewData["Title"] = "User Page";
+}
+
+<style>
+
+    .food-container {
+        margin: 200px 0px 100px 0px;
+    }
+
+    .card-container {
+        width: 100%;
+        height: auto;
+        position: relative;
+        border: 1px solid rgba(10, 10, 10, 0.2);
+        border-radius: 15px;
+        box-shadow: 0px 2px 10px 0px rgba(10, 10, 10, 0.2);
+        padding: 13px;
+    }
+
+    .image-container {
+        width: 80px;
+        height: 80px;
+        border-radius: 5px;
+        position: relative;
+        overflow: hidden;
+    }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            object-fit: contain;
+        }
+
+    .foodName {
+        width: 100px;
+        font-size: 16px;
+        font-weight: 700;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .staus-cnotainer {
+        margin: 2px 0px;
+    }
+
+    .status {
+        color: #a4b0be;
+        font-size: 10px;
+    }
+
+    .vegiterian {
+        width: 15px;
+        height: 15px;
+        border: 2px solid rgba(10, 150, 10, 0.8);
+        border-radius: 2px;
+        position: absolute;
+        top: 10px;
+        left: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .veg-circle {
+        width: 6px;
+        height: 6px;
+        background-color: rgba(10, 150, 10, 0.8);
+        border-radius: 50%;
+    }
+
+    .vegiteriannon {
+        width: 15px;
+        height: 15px;
+        border: 2px solid rgba(150, 10, 10, 0.8);
+        border-radius: 2px;
+        position: absolute;
+        top: 10px;
+        left: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .vegnon-circle {
+        width: 5px;
+        height: 5px;
+        background-color: rgba(150, 10, 10, 0.8);
+        border-radius: 50%;
+    }
+
+    .description {
+        height: 35px;
+        font-size: 13px;
+    }
+
+    .alert-container {
+        width: 100%;
+        height: 60px;
+    }
+
+    .increase-button{
+
+        border: 1px solid rgba(10, 10,10, 0.2);
+        border-radius: 20px 0px 0px 20px;
+        padding: 5px 10px;
+        font-weight: 700;
+
+    }
+
+    .decrese-button{
+
+        border: 1px solid rgba(10, 10, 10, 0.2);
+        border-radius: 0px 20px 20px 0px;
+        padding: 5px 10px;
+        font-weight: 700;
+
+    }
+
+    .qty{
+
+        border: 1px solid rgba(10, 10, 10, 0.2);
+        padding: 0px 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .food-button {
+        width: 70px;
+        height: 30px;
+        background-color: #ffffff;
+        border: 1px solid rgba(50, 80, 150, 0.5);
+        border-radius: 10px;
+        margin: 0px 10px 0px 0px;
+        font-size: 10px;
+    }
+
+    .order-button{
+
+        color: #efefef;
+        background-color: rgba(255, 100, 10, 0.8);
+        padding: 10px 20px;
+        border: none;
+        outline: none;
+        border-radius: 5px;
+        box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+
+    }
+
+</style>
+
+@if(TempData["CartItem"] != null)
+{
+    <div class="alert alert-primary">@TempData["CartItem"]</div>
+}
+
+<div class="food-container">
+
+    @{
+        var total = 0;
+        var subTotal = 0;
+        var cartItem = 0;
+    }
+
+    <div class="container d-flex fw-bold fs-5">
+
+        <div class="ms-auto text-secondary">
+
+            Cart Item:  @cartItem
+
+        </div>
+
+    </div>
+
+    <div class="container d-flex mt-2">
+
+        <div class="me-3">
+            <form id="orderForm" asp-controller="User" asp-action="CartOrderDetail" method="post">
+                <input type="button" class="order-button" id="deletebtn" value="Order selected" onclick="orderSelected()" />
+
+                <!-- ... your form content ... -->
+                <!-- Ensure the form includes the selectedRestaurantIds hidden field -->
+                <input type="hidden" name="selectedCartItemIds" id="selectedCartItemIds" />
+
+            </form>
+        </div>
+
+        <div>
+
+            <form asp-controller="User" asp-action="MST_OrderDetail2">
+
+                <input type="submit" class="order-button" value="Order now" />
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <div class="container">
+
+        @foreach (DataRow dr in Model.Rows)
+        {
+
+            <div class="card-container d-flex my-4">
+
+                <div class="me-2">
+
+                    <input type="checkbox" name="selectedCartItem" class="RestaurntCheck" value="@Convert.ToInt32(dr["CartID"])" />
+
+                </div>
+
+                <div class="image-container">
+
+                    <img src="@Url.Content(dr["FoodImage"].ToString())" />
+
+                </div>
+
+                <div>
+
+                    <div class="ms-4">
+
+                        <div class="fs-6 fw-bold">@dr["FoodName"]</div>
+                        <p>@dr["Review"]</p>
+
+                    </div>
+
+                    <div class="d-flex mt-2 ms-4">
+                        <form method="post" asp-area="Food" asp-controller="Food" asp-action="AddEditFood">
+                            <input type="hidden" name="FoodID" value="@Convert.ToInt32(dr["FoodID"])" />
+                            <button type="submit" class="text-secondary food-button"><i class="bi bi-pen me-1" style=""></i>Order now</button>
+                        </form>
+                        <form method="post" asp-controller="User" asp-action="CartDelete">
+                            <input type="hidden" name="CartID" value="@Convert.ToInt32(dr["CartID"])" />
+                            <button type="submit" class="text-secondary food-button"><i class="bi bi-trash me-1" style=""></i>Remove</button>
+                        </form>
+                    </div>
+
+                </div>
+
+                <div class="ms-auto">
+
+                    <div class="my-2 d-flex">
+
+                        <form asp-controller="User" asp-action="Cart_Update">
+                            <input type="hidden" name="CartID" , value="@Convert.ToInt32(dr["CartID"])" />
+                            <input type="hidden" name="Quantity" value="-1" />
+                            <input type="submit" class="btn increase-button @(Convert.ToInt32(dr["Quantity"]) == 1 ? "disabled" : "enabled") " value="-" />
+                        </form>
+                        <div class="qty">@dr["Quantity"]</div>
+                        <form asp-controller="User" asp-action="Cart_Update">
+                            <input type="hidden" name="CartID" value="@Convert.ToInt32(dr["CartID"])" />
+                            <input type="hidden" name="Quantity" value="1" />
+                            <input type="submit" class="btn decrese-button" value="+" />
+                        </form>
+
+                    </div>
+
+                </div>
+
+                <div class="fw-bold mx-5 mt-2">@dr["Price"]</div>
+                @{
+                    total += Convert.ToInt32(dr["Price"]);
+                    subTotal += Convert.ToInt32(dr["Price"]) * Convert.ToInt32(dr["Quantity"]);
+                }
+
+            </div>
+
+            @*<div class="card-container shadow-sm me-3">
+
+                @{
+                    cartItem = Convert.ToInt32(dr["CartItem"]);
+                }
+
+                <div class="image-container">
+
+                    <img src=@dr["FoodImage"] />
+
+                </div>
+                @if (Convert.ToBoolean(dr["IsVegiterian"]))
+                {
+
+                    <div class="vegiterian">
+                        <div class="veg-circle"></div>
+                    </div>
+
+                }
+                else
+                {
+                    <div class="vegiteriannon">
+                        <div class="vegnon-circle"></div>
+                    </div>
+                }
+                <div class="d-flex justify-content-between align-items-center mt-2">
+
+                    <p class="foodName">@dr["FoodName"]</p>
+                    <p>@dr["Price"]</p>
+                    @{
+                        total += Convert.ToInt32(dr["Price"]);
+                    }
+                </div>
+                <div class="d-flex mt-1">
+                    <i class="bi bi-star" style="color: rgba(200 , 30 , 50 , 0.8)"></i>
+                    <p class="ms-2">@dr["Review"]</p>
+
+                </div>
+                <div class="staus-cnotainer">
+
+                    @if (Convert.ToBoolean(dr["IsActive"]))
+                {
+                <p class="status">Available</p>
+                }
+                else
+                {
+                <p class="status">Not Available</p>
+                }
+
+                </div>
+                <div class="description-container mt-2">
+
+                    <p class="description">@dr["Description"]</p>
+
+                </div>
+
+                <div class="my-2 d-flex">
+
+                    <form asp-controller="User" asp-action="Cart_Update">
+                        <input type="hidden" name="CartID", value="@Convert.ToInt32(dr["CartID"])" />
+                        <input type="hidden" name="Quantity" value="1" />
+                        <input type="submit" class="increase-button" value="+" />
+                    </form>
+                    <div class="qty">@dr["Quantity"]</div>
+                    <form asp-controller="User" asp-action="Cart_Update">
+                        <input type="hidden" name="CartID" value="@Convert.ToInt32(dr["CartID"])" />
+                        <input type="hidden" name="Quantity" value="-1" />
+                        <input type="submit" class="decrese-button" value="-" />
+                    </form>
+
+                </div>
+
+                <div class="d-flex mt-2">
+                    <form method="post" asp-area="Food" asp-controller="Food" asp-action="AddEditFood">
+                        <input type="hidden" name="FoodID" value="@Convert.ToInt32(dr["FoodID"])" />
+                        <button type="submit" class="text-secondary food-button"><i class="bi bi-pen me-1" style=""></i>Order now</button>
+                    </form>
+                    <form method="post" asp-controller="User" asp-action="CartDelete">
+                        <input type="hidden" name="CartID" value="@Convert.ToInt32(dr["CartID"])" />
+                        <button type="submit" class="text-secondary food-button"><i class="bi bi-trash me-1" style=""></i>Remove</button>
+                    </form>
+                </div>
+
+            </div>*@
+        }
+
+    </div>
+
+    <div class="container d-flex">
+
+        <div class="ms-auto fw-bold fs-5 text-secondary">Total: @total</div>
+
+    </div>
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+@section Scripts {
+
+    <script>
+        $(document).ready(function () {
+            //alert("Hello");
+            $("#myInput").on("keyup", function () {
+                //alert("Function");
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+
+        });
+
+        function orderSelected() {
+            console.log("Deleting selected...");
+            alert("Hello")
+            var form = document.getElementById("orderForm");
+            var checkboxes = document.getElementsByName("selectedCartItem");
+            var selectedCartItemIds = [];
+
+            checkboxes.forEach(function (checkbox) {
+                if (checkbox.checked) {
+                    selectedCartItemIds.push(checkbox.value);
+                }
+            });
+
+            // Set the value of the hidden field with the selected restaurant IDs
+            document.getElementById("selectedCartItemIds").value = selectedCartItemIds.join(',');
+
+            console.log("Submitting form...");
+            form.submit();
+        }
+
+        window.setTimeout(function (){
+
+            $(".alert").fadeTo(500, 0).slideUp(1000, function (){
+
+                $(this).remove();
+
+            });
+
+        }, 1000);
+
+        
+
+    </script>
+
+}

@@ -1,0 +1,98 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model ZomatoApp.Areas.LOC_City.Models.LOC_CityModel;
+@using ZomatoApp.Areas.LOC_Country.Models;
+@using ZomatoApp.Areas.LOC_State.Models;
+
+<div class="mt-4 mb-2">
+    <form asp-area="LOC_City" asp-controller="LOC_City" asp-action="CityList">
+        <button class="btn border border-secondary text-secondary" type="submit">Back</button>
+    </form>
+
+</div>
+
+<div class="container border border-gray rounded p-5 shadow">
+
+    <h2><i class="bi bi-gear me-2 pb-5" style="font-size: 25px"></i>City</h2>
+
+    <hr />
+
+    <form class="pt-3" method="post" asp-area="LOC_City" asp-controller="LOC_City" asp-action="SaveCity">
+        <div class="col my-4">
+            <input type="text" class="form-control" asp-for="CityName" placeholder="City Name" aria-label="First name">
+            <span asp-validation-for="CityName" class="text-danger"></span>
+        </div>
+
+        <div class="col my-4">
+            <select id="selectedCountry" asp-for="CountryID" class="form-control" onchange="funOnStateChange()">
+                <option>Select Country</option>
+                @foreach (LOC_CountryDropDownModel dr in ViewBag.CountryList)
+                {
+                    <option value="@dr.CountryID">@dr.CountryName</option>
+                }
+            </select>
+            <span asp-validation-for="CountryID" class="text-danger"></span>
+        </div>
+
+        <div  class="col my-4">
+            <select id="selectedState"  asp-for="@Model.StateID" class="form-control">
+                <option>Select State</option>    
+                
+            </select>
+        </div>
+
+        @*<div class="col my-4">
+            <input type="text" class="form-control" asp-for="StateID" placeholder="State ID" aria-label="First name">
+            <span asp-validation-for="StateID" class="text-danger"></span>
+        </div>*@
+
+        <div class="mt-4">
+
+            <input type="hidden" asp-for="CityID" />
+            <button class="btn btn-primary" type="submit">Submit</button>
+
+        </div>
+
+
+    </form>
+
+</div>
+
+@section Scripts{
+
+    <script>
+        function funOnStateChange() {
+            var CountryID = $("#selectedCountry").val();
+
+            $("#selectedState").empty();
+            $("#selectedState").append($("<option></option>").val("").html("Select State"));
+            
+            if (CountryID !== "") {
+               
+                $.ajax(
+                    {
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: "@Url.Action("StatesForComboBox","LOC_City", new {area = "LOC_City"})" + "?&CountryID=" + CountryID,
+                        data: {},
+                        dataType: "json",
+                        success: function (Result) {
+                            
+                            $.each(Result, function (key, value) {
+                             
+                                $("#selectedState").append($("<option></option>").val(value.stateID).html(value.stateName));
+                            });
+                        },
+                        error: function (err) {
+                            alert("Error white fetch data");
+                        }
+
+                    }
+                )
+            }
+        }
+</script>
+
+}

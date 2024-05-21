@@ -1,0 +1,255 @@
+﻿@using System.Data;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+
+    .line {
+        width: 50%;
+        height: 1px;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    ::placeholder {
+        font-size: 13px;
+    }
+
+    .table-container {
+        /*overflow: scroll;*/
+        overflow-x: scroll;
+    }
+
+    .activeRestaurant {
+        width: 10px;
+        height: 10px;
+        background-color: rgba(100, 255, 150, 0.9);
+        border-radius: 50%;
+    }
+
+    .unactiveRestaurant {
+        width: 10px;
+        height: 10px;
+        background-color: rgba(255, 100, 150, 0.9);
+        border-radius: 50%;
+    }
+
+    .foodTypeCard {
+        width: 350px;
+        height: auto;
+        transition: all 0.2s linear;
+        overflow: visible;
+    }
+
+    .foodTypeCard:hover{
+        
+        transform: translateY(-10px);
+
+    }
+
+    .foodTypeCard:hover .image-container{
+        
+        border: none;
+        transform: translateY(-30px) scale(1.5);
+
+    }
+
+    .image-container{
+
+        width: 70px;
+        height: 70px;
+        position: relative;
+        border: 2px solid #dfe4ea;
+        border-radius: 50%;
+        overflow: hidden;
+        transition: all 0.2s linear;
+    }
+
+    .image-container img{
+
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        object-fit: contain;
+    }
+
+    .foodtype-button{
+
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        font-size: 10px;
+    }
+
+    .food-button{
+
+        width: 90px;
+        height: 30px;
+        border-radius: 5px 5px 15px 5px;
+        transform: skew(-20deg);
+        font-size: 11px;
+        transition: all 0.2s linear;
+    }
+
+    .food-button:hover{
+
+        background-color: #f1f2f6;
+
+    }
+
+    .alert-container {
+        width: 100%;
+        height: 60px;
+    }
+
+    .foodName{
+
+        font-weight: 600;
+    }
+
+    ::-webkit-scrollbar {
+        width: 5px;
+        height: 3px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: #efefef;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: rgba(240, 240, 240, 0.8);
+    }
+
+    ::-webkit-scrollbar-thumb:horizontal {
+        background: #efefef;
+        border-radius: 10px;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+
+</style>
+
+<div class="alert-container">
+    @if (TempData["Data"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            @TempData["Data"]
+        </div>
+    }
+</div>
+
+<div class="pagetitle my-1 mx-2">
+    <h1>Dashboard</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item active">FoodType</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<div class="border rounded px-5 py-2 shadow-sm mb-3">
+
+    <div>
+        <div class="w-25 my-3">
+            <label class="visually-hidden" for="autoSizingInputGroup">Username</label>
+            <div class="input-group">
+                <div class="input-group-text bg-transparent" style="font-size: 15px"><i class="bi bi-search"></i></div>
+                <input type="text" class="form-control" id="myInput" placeholder="Search here">
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="border rounded p-4 shadow-sm">
+
+    <div class="mb-3 d-flex justify-content-end align-items-center">
+
+        <a asp-area="Restaurant" asp-controller="Restaurant" asp-action="AddEditRestaurant">
+            <button class="btn bg-success text-white py-2"><i class="bi bi-plus-circle me-2"></i>Add FoodType</button>
+        </a>
+
+    </div>
+
+    <div class="d-flex justify-content-start align-items-center">
+        @foreach (DataRow dr in Model.Rows)
+        {
+            <div class="border rounded p-4 me-5 shadow-sm table-container foodTypeCard d-flex">
+
+                <div class="image-container">
+                    <img src=@dr["FoodTypeImage"] class="img-fluid p-2" />
+                </div>
+
+                <div class="detail-container ms-3">
+
+                    <p class="foodName">@dr["FoodTypeName"]</p>
+
+                    <form method="post" asp-area="Restaurant" asp-controller="Restaurant" asp-action="FoodTypeWiseFood">
+                        <input type="hidden" name="FoodTypeID" value="@Convert.ToInt32(dr["FoodTypeID"])" />
+                        <button type="submit" class="btn border food-button">Test Now</button>
+                    </form>
+
+                </div>
+
+                <div class="ms-auto d-flex">
+                    <form method="post" asp-area="Restaurant" asp-controller="Restaurant" asp-action="AddEditRestaurant">
+                        <input type="hidden" name="RestaurantID" value="@Convert.ToInt32(dr["RestaurantID"])" />
+                        <button type="submit" class="btn border border-primary text-primary pt-2 me-2 foodtype-button d-flex justify-content-center align-items-center"><i class="bi bi-pen" style=""></i></button>
+                    </form>
+                    <form method="post" asp-area="Restaurant" asp-controller="Restaurant" asp-action="DeleteRestaurant">
+                        <input type="hidden" name="RestaurantID" value="@Convert.ToInt32(dr["RestaurantID"])" />
+                        <button type="submit" class="btn bordre border-danger text-danger pt-2 foodtype-button d-flex justify-content-center align-items-center"><i class="bi bi-trash" style=""></i></button>
+                    </form>
+                </div>
+
+            </div>
+        }
+    </div>
+
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+@section Scripts {
+
+    <script>
+        $(document).ready(function () {
+            //alert("Hello");
+            $("#myInput").on("keyup", function () {
+                //alert("Function");
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+
+        function deleteCity() {
+
+            if (confirm("Are you sure want to delete?")) {
+
+                return true
+
+            }
+
+            return false
+
+        }
+
+        window.setTimeout(function () {
+            $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                $(this).remove();
+            })
+        }, 1000);
+
+    </script>
+
+}
